@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson 5</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="id"></div>
+  </body>
+  <script>
+    //createApp 表示创建一个Vue应用 -->
+    //传入参数表示这个应用最外层组件
+    //mvvm 设计模式 m-> model 数据， v-> view 视图，vm-> viewModel 视图模型 -->
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello Vue 3!"
+        };
+      },
+      template: "<div>{{message}}</div>"
+    });
+
+    const vm = app.mount("#id");
+  </script>
+</html>
