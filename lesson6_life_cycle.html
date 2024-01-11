@@ -33,6 +33,22 @@
       // 在组件内容被渲染到页面之后自动执行的函数
       mounted() {
         console.log("mounted");
+      },
+      // 当数据发生变化时会立即自动执行函数
+      beforeUpdate() {
+        console.log("beforeUpdate");
+      },
+      // 数据发生变化，页面重新渲染后，自动执行
+      updated() {
+        console.log("updated");
+      },
+      //vue 应用失效时，自动执行的函数
+      beforeUnmount() {
+        console.log("beforeUnmount");
+      },
+      // 组件卸载后，自动执行
+      unmounted() {
+        console.log("unmounted");
       }
     });
 
