@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="id"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          list: ["dell", "lee", "teacher"],
+          listObject: {
+            firstName: "dell",
+            middleName: "lee",
+            lastName: "teacher"
+          }
+        };
+      },
+      template: ` <div>
+        <div v-for="item in list">{{item, index}} :key="index"></div>
+        <div v-for="(value, key, index) in listObject">
+          {{index, key, value}}
+        </div>
+        <botton @click="handleAddButtonClick">add</button>
+        /div>`,
+      methods: {
+        handleAddButtonClick() {
+          //1.使用数组的变更函数 push,pop,shift unshift splice sort reverse
+          this.list.push("new");
+          this.list.pop();
+          this.list.shift();
+          this.list.unshift("new");
+          this.list.splice(1, 1, "new");
+          this.list.sort();
+          this.list.reverse();
+          //2.直接替换数组
+          this.list = ["a", "b", "c"];
+          this.list = ["a", "b", "c"].filter((item) => item !== "a");
+          //3.直接更新数组内容
+          this.list[0] = "new";
+          //4.直接添加对象内容
+          this.listObject.new = "new";
+          //5.直接删除对象内容
+          delete this.listObject.new;
+        }
+      }
+    });
+    const vm = app.mount("#id");
+  </script>
+</html>
