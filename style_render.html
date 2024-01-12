@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="id"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello Vue 3!",
+          classString: "red",
+          classObject: {
+            red: false,
+            blue: true
+          },
+          classArray: ["red", "bold"],
+          styleString: "color: blue; font-size: 20px;",
+          styleObject: {
+            color: "blue",
+            fontSize: "20px"
+          }
+        };
+      },
+      template: `
+        <div :class="classString">{{message}}</div>
+        div :class="classObject">{{message}}</div>
+        <div :class="classArray">{{message}}</div>
+        <demo class="green"></demo>
+        
+        <div :style="styleString">{{message}}</div>
+        <div :style="styleObject">{{message}}</div>
+      `
+    });
+    app.component("demo", {
+      template: `
+        <div :class="$attrs.class">{{message}}</div>
+        <div :class="classArray">{{message}}</div>
+        `
+    });
+    const vm = app.mount("#id");
+  </script>
+</html>
