@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script scr="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "hello world",
+          checked: false,
+          //多个绑定checkbox
+          checkList: [],
+          radioSelect: "篮球",
+          selectValue: "",
+          options: [
+            { text: "篮球", value: { value: "篮球" } },
+            { text: "足球", value: { value: "足球" } }
+          ],
+          checked: false
+        };
+      },
+      template: `<div>
+            <input v-model="message"></input>
+            <textarea v-model="message"></textarea>
+            <input type="checkbox" v-model="checked"></input>
+            <input type="checkbox" value="篮球" v-model="checkList">篮球</input>
+            <inupt type="checkbox" value="足球" v-model="checkList">足球</input>
+            <input type="checkbox" value="乒乓球" v-model="checkList">乒乓球</input>
+
+            <input type="radio" value="篮球" v-model="checkList">篮球</input>
+            <inupt type="radio" value="足球" v-model="checkList">足球</input>
+            <input type="radio" value="乒乓球" v-model="checkList">乒乓球</input>
+            <div>
+                <select v-model="selectValue">
+                    <Option>a</Option>
+                    <Option>b</Option>
+                    <Option>c</Option>
+                </select>
+            </div>
+            <div>
+                <select v-model="option">
+                    <Option v-for="option in options" :key="option.value" :value="option.value">{{ option.text }}</
+                </select>
+            </div>
+            <input type="checkbox" v-model="checked" true-value="hello" false-value="world"></input>
+        </div>`
+    });
+
+    const vm = app.mount("#app");
+  </script>
+</html>
