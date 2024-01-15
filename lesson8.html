@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson 8</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="rot"></div>
+  </body>
+  <script>
+    // data & methods & computed watcher
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "hello world",
+          count:2,
+          price:5
+        };
+      },
+      method:{
+        handleClick(){
+            console.log('click')
+        }
+      },
+      template: `
+        <div>{{message}}</div>
+      `,
+      watch:{
+        // price 发生变化时 函数会执行
+        price(current, pre){
+            
+        }
+      },
+      computed:{
+        total(){
+            return this.count * this.price
+        }
+      }
+    });
+  </script>
+</html>
