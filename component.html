@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // 创建Vue实例
+    // 组件具备共用性 数据具有独立性
+    // 组件的复用性 数据的可复用性
+    // 全局组件只要定义了就能使用，但是性能不高
+    // 局部组件首字母应该为大写
+    const app = Vue.createApp({
+      //局部组件如何使用
+      components: { counter: Counter, helloWorld: HelloWorld },
+      template: `
+            <div>
+                <h1>{{ message }}</h1>
+                <hello></hello>
+                <world></world>
+                <counter></counter>
+                <hello-world></hello-world>
+                <button @click="changeMessage">Change Message</button>
+            </div>
+        `
+    });
+    // 全局组件
+    app.component("hello", {
+      template: `
+            <div>
+                <h1>hello</h1>
+            </div>
+        `
+    });
+    app.component("world", {
+      template: `
+            <div>
+                <h1>world</h1>
+            </div>
+        `
+    });
+    // 局部组件
+    const Counter = {
+      data() {
+        return {
+          count: 1
+        };
+      },
+      template: `<div>hell wolrd</div>`
+    };
+    const HelloWorld = {
+      template: `<div>hello world</div>`,
+      data() {
+        return {
+          message: "Hello, World!"
+        };
+      },
+      methods: {
+        changeMessage() {
+          this.message = "Hello, Vue!";
+        }
+      }
+    };
+    // 创建Vue实例
+    const vm = app.mount("#app");
+  </script>
+</html>

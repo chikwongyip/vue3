@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // v-bind="params" 传递对象
+    // 属性传的时候 使用content-abc 接的时候使用 contentAbc
+    // 单向数据流的概念 子组件可以使用父组件的传过来的数据，但是不能改变父组件传递过来的数据
+    const app = Vue.createApp({
+      data() {
+        return {
+          params: {
+            num: 123,
+            num2: 456,
+            num3: 678
+          },
+          num: 123
+        };
+      },
+      template: `
+      <div>
+          <test v-bind="params"></test> 
+          <counter :count="num"></counter>
+      </div>
+      `
+    });
+    app.component("test", {
+      props: ["num", "num2", "num3"],
+      template: `  <div>{{content}}</div>`
+    });
+    app.component("counter", {
+      props: ["count"],
+      data() {
+        return {
+          myCount: this.count
+        };
+      },
+      template: `<div>{{myCount}}</div>`
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>
