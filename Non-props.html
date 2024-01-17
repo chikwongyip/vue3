@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // Non-props 属性 一般把样式属性传递给子组件
+    const app = Vue.createApp({
+      template: `
+            <div>
+                <counter msg="hello"></counter>
+            </div>
+        `
+    });
+    app.component("counter", {
+      //绑定某个div 属性 接收所有属性
+      //inheritAttrs:false,
+      template: `<div>counter</div>
+        <div v-bind="$attrs">counter</div>
+        <div>counter</div>
+        `
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>
