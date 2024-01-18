@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // 组件传值简写
+    const app = Vue.createApp({
+      data() {
+        return {
+          count: 1
+        };
+        template: `<div>
+            <counter v-model="count"></counter>
+        </div>`;
+      }
+    });
+    app.component("counter", {
+      //接收参数必须是modelValue
+      props: ["modelValue"],
+      methods: {
+        handleClick() {
+          this.$emit("update:modelValue", this.modelValue + 1);
+        }
+      }
+    });
+  </script>
+</html>

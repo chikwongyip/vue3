@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          count: 1
+        };
+      },
+      methods: {
+        handleClick(param) {
+          this.count = this.count + param;
+        }
+      },
+      //模版内命名使用 - 方式来命名
+      template: `<div>
+            <count :count="count" @add-one="handleClick"></count>
+        </div>`
+    });
+    app.component("count", {
+      // props 只读不能修改
+      props: ["count"],
+      //emits:["add"], //定义组件向外触发组件
+      emits: {
+        add: (count) => {
+          if (count) {
+            count > 0;
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+      methods: {
+        //方法驼峰式命名
+        //子组件调用父组件方法
+        addOne() {
+          this.$emit("addOne", 2);
+        }
+      },
+      template: `<div>{{count}}</div>`
+    });
+  </script>
+</html>
