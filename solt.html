@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // 父模版调用的数据属性，使用的都是父版的属性
+    // 子模版嗲用的数据属性，使用的都是子模板的属性
+    const app = Vue.createApp({
+      template: `<myform>
+            <div>提交</div>
+        </myform>
+        <myform>
+            <button>提交</button>
+        </myform>
+        <myform>
+           
+        </myform>
+        `
+    });
+    app.component("myform", {
+      methods: {
+        handleClick() {
+          alert(123);
+        }
+      },
+      // slot 没有办法绑定事件通过span标签来绑定使用
+      // slot 可以传字符串 也可以穿组件
+      template: `
+        <div>
+            <input>
+            </input>
+            <span @click="handlClick">
+                <slot>default value</slot>
+            </span>
+            
+            </button>
+        </div>`
+    });
+  </script>
+</html>

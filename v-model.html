@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // v-model 自定义修饰符
+    const app = Vue.createApp({
+      data() {
+        return {
+          count: "a"
+        };
+      },
+      template: `
+            <counter v-model.uppercase="count"></counter>
+        `
+    });
+    app.component("counter", {
+      props: {
+        modelValue: String,
+        modelModifiers: {
+          default: () => ({})
+        }
+      },
+      methods: {
+        handleClick() {
+          let newValue = this.modelValue;
+          if (this.modelModifiers.uppercase) {
+            newValue = newValue.toUpperCase();
+          }
+          this.$emit("update:modelValue", newValue);
+        }
+      },
+      template: `    
+            <div @click="handleClick">{{modelValue}}</div>`
+    });
+    app.mount("#app");
+  </script>
+</html>

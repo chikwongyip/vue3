@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      template: `
+           <counter v-model:count="count" v-model:count1="count1"></counter>
+        `,
+      data() {
+        return {
+          count: 1,
+          count1: 1
+        };
+      }
+    });
+    app.component("counter", {
+      props: ["count", "count1"],
+      methods: {
+        handleClick() {
+          this.$emit("update:count", this.count + 1);
+        },
+        handleClick1() {
+          this.$emit("update:count1", this.count1 + 1);
+        }
+      },
+      template: `<div @click="handleClick">{{count}}</div>
+                    <div @click="handleClick1">{{count1}}</div>`
+    });
+  </script>
+</html>
