@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // provide/inject 涉及多层组件传值
+    const app = Vue.createApp({
+      data() {
+        return {
+          count: 0
+        };
+      },
+      provide() {
+        return {
+          count: this.count
+        };
+      },
+      template: `<div>
+            <child></child>
+        </div>`
+    });
+    app.component("child", {
+      template: `<child-child></child-child>`
+    });
+    app.component("child-child", {
+      injected: ["count"],
+      template: `<div>{{count}}</div>`
+    });
+  </script>
+</html>

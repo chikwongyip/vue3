@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // v-once 让某个元素只渲染一次
+    //ref 实际上获取dom节点 、组件引用
+    const app = Vue.createApp({
+      data() {
+        return {
+          count: 1
+        };
+      },
+      template: `<div @click="count +=1" v-once></div>
+      <div ref="count">
+        {{count}}
+      </div>
+      `,
+      mounted() {
+        // 绑定ref 就可以获取到dom节点
+        console.log(this.$refs.count);
+      }
+    });
+  </script>
+</html>

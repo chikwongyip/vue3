@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // 作用域插槽
+    const app = Vue.createApp({
+      template: `
+            <list v-solt="soltProps">
+                <span>{{slotProps.item}}</span>
+            </list>
+        `
+    });
+    app.component("list", {
+      data() {
+        return {
+          list: [1, 2, 3, 4, 5]
+        };
+      },
+      template: `<div>
+            <slot v-bind:item="list"></slot>
+      </div>`
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>

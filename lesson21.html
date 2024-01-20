@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // 动态组件 根据数据变换，结合 component 这个标签，来随时动态切换组件的显示
+
+    const app = Vue.createApp({
+      data() {
+        return {
+          componentName: "input-item"
+        };
+      },
+      methods: {
+        changeComponent() {
+          this.componentName =
+            this.componentName === "input-item" ? "comon-item" : "input-item";
+        }
+      },
+      template: `
+      <keep-alive>
+        <component :is="componentName"></component>
+        <button @click="changComponent"></button>
+      </keep-alive>
+      `
+    });
+    app.component("input-item", {
+      template: `<input></input>`
+    });
+    app.component("comon-item", {
+      template: `<div>hello world</div>`
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>
