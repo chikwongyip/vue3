@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // mixin 混入
+    // 组件优先级比mixin高
+    // 声明周期函数先执行 后执行原生
+    // 自定义属性 组件优先级比mixin高
+    const myMixin = {
+      data() {
+        return {
+          number: 2
+        };
+      },
+      created() {
+        console.log("mixin created");
+      }
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+          number: 0
+        };
+      },
+      mixins: [myMixin],
+      methods: {
+        handleClick() {
+          console.log(this.number);
+        }
+      },
+      template: `<div>
+        <div>{{number}}</div>
+        <button @click="handleClick">click me</button>
+      </div>`,
+      created() {
+        console.log("app created");
+      }
+    });
+    // 全局混入
+    app.mixin(myMixin);
+    //修改优先策略
+    app.config.optionMergeStrategies.number = (mixinVal, appValue) => {
+      return mixinVal || appValue;
+    };
+  </script>
+</html>
