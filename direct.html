@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@nex"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    //局部自定义指令
+    const directive = {
+      focus: {
+        mounted(el) {
+          el.focus();
+        }
+      }
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+          hello: true
+        };
+      },
+      directives: directive,
+      template: `<div v-if="hello">
+            <input v-foucs></input>
+        </div>`
+    });
+    //全局自定义指令
+    app.directive("focus", {
+      beforeMount(el) {
+        console.log("beforeMount");
+      },
+      mounted(el) {
+        console.log("mounted");
+        el.focus();
+      },
+      beforeUpdate(el) {
+        console.log("beforeUpdate");
+      },
+      updated(el) {
+        console.log("updated");
+      },
+      beforeUnmount(el) {
+        console.log("beforeUnmount");
+      },
+      unmounted(el) {
+        console.log("unmounted");
+      }
+    });
+  </script>
+</html>
