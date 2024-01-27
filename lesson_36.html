@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // toRef
+    const app = Vue.createApp({
+      template: `
+            <div>{{data.name}}</div>
+            <div>{{age}}</div>
+            `,
+      setup(props, context) {
+        const { reactive, toRef } = Vue;
+        const data = reactive({ name: "dell" });
+        // data 里面尝试结构age
+        const age = toRef(data, "age");
+
+        return { data, age };
+      }
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@nex"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      template: `<child>parent</child>`
+    });
+    app.component("child", {
+      template: `<div @click="handleClick">1234</div>`,
+      setup(props, context) {
+        const { emit } = context;
+        function handleClick() {
+          emit("change");
+        }
+        return {
+          handleClick
+        };
+      }
+    });
+    const vm = app.mount("#app");
+  </script>
+</html>
