@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // ref , reactive 都是响应式的
+    // ref 处理基础性数据
+    // reactive 处理对象数据
+    const app = Vue.createApp({
+      template: `<div><{{name}}/div>
+        <div>{{nameObj.name}}</div>`,
+      setup(props, context) {
+        const { ref } = Vue;
+        let name = ref("dell");
+        setTimeout(() => {
+          name.value = "lee";
+        }, 2000);
+        return { name };
+
+        const { reactive, readOnly, toRefs } = Vue;
+        // 把对象变成一个响应式引用
+        const nameObj = reactive({ name: "dell" });
+        // 只读的响应式引用
+        const nameObjCopy = readOnly(nameObj);
+        setTimeout(() => {
+          nameObj.name = "lee";
+          nameObjCopy.name = "lee";
+        }, 2000);
+        const { name_1 } = toRefs(nameObj);
+        return { nameObj, name_1 };
+      }
+    });
+  </script>
+</html>
