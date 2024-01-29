@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      setup() {
+        const { ref, watch, reactive } = Vue;
+        const name = ref("dell");
+        const nameObj = reactive({ name: "dell" });
+        watch([() => nameObj.name, name], ([new1, new2], [old1, old2]) => {
+          console.log(new1, new2, old1, old2);
+        });
+        return { name, nameObj };
+      },
+      template: `<div>
+        <div>
+            name: <input v-mode="name"></input>
+        </div>
+        <div>
+            name is : {{name}}
+        </div>
+    </div>`
+    });
+  </script>
+</html>
